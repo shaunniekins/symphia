@@ -1,37 +1,19 @@
+// main_page.dart
+
 import 'package:flutter/material.dart';
 import 'package:flutter_gemini/flutter_gemini.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:get/get.dart';
 import 'package:symphia/controller.dart';
-import 'package:animated_splash_screen/animated_splash_screen.dart';
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return GetMaterialApp(
-        home: AnimatedSplashScreen(
-      splashIconSize: 150,
-      splash: ClipOval(
-        child: Image.asset(
-          'assets/images/symphia-logo.jpeg',
-          fit: BoxFit.cover,
-        ),
-      ),
-      nextScreen: const Home(),
-    ));
-  }
-}
-
-class Home extends StatefulWidget {
-  const Home({super.key});
+class MainPage extends StatefulWidget {
+  const MainPage({Key? key}) : super(key: key);
 
   @override
-  _HomeState createState() => _HomeState();
+  _MainPageState createState() => _MainPageState();
 }
 
-class _HomeState extends State<Home> with TickerProviderStateMixin {
+class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
   final controller = Get.put(Controller());
 
   @override

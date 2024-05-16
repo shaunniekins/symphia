@@ -15,36 +15,29 @@ class Controller extends GetxController {
 
   void onListen() async {
     if (!isListening.value) {
-      var status = await Permission.microphone.request();
-      if (status.isGranted) {
-        bool available = await speech.initialize(
-          onStatus: (val) async {
-            if (val == 'notListening' &&
-                isListening.value &&
-                !hasSpoken.value) {
-              isListening.value = false;
-              gemini
-                  .streamGenerateContent(
-                      "Respond directly as if you are a human having a natural conversation, without any preamble or introduction, or any formatting or text styles. Give short answer as what would any human would respond, as if you are speaking: ${text.value}")
-                  .listen((value) {
-                if (value.output != null) {
-                  String output = value.output ?? '';
-                  print('Output Length: ${output.length}');
-                  speak(output);
-                }
-              }).onError((e) {
-                print('Gemini Error: $e');
-              });
-            } else if (val == 'listening') {
-              isListening.value = true;
-            }
-          },
-        );
-        if (available) {
-          speech.listen(onResult: (val) => text.value = val.recognizedWords);
-        }
-      } else {
-        print('Microphone permission not granted');
+      bool available = await speech.initialize(
+        onStatus: (val) async {
+          if (val == 'notListening' && isListening.value && !hasSpoken.value) {
+            isListening.value = false;
+            gemini
+                .streamGenerateContent(
+                    "Respond directly as if you are a human having a natural conversation, without any preamble or introduction, or any formatting or text styles. Give short answer as what would any human would respond, as if you are speaking: ${text.value}")
+                .listen((value) {
+              if (value.output != null) {
+                String output = value.output ?? '';
+                print('Output Length: ${output.length}');
+                speak(output);
+              }
+            }).onError((e) {
+              print('Gemini Error: $e');
+            });
+          } else if (val == 'listening') {
+            isListening.value = true;
+          }
+        },
+      );
+      if (available) {
+        speech.listen(onResult: (val) => text.value = val.recognizedWords);
       }
     }
   }
