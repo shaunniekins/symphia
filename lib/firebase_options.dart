@@ -3,6 +3,7 @@
 import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
 import 'package:flutter/foundation.dart'
     show defaultTargetPlatform, kIsWeb, TargetPlatform;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 /// Default [FirebaseOptions] for use with your Firebase apps.
 ///
@@ -40,51 +41,53 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyAF2b2z5B1sgEh74rg8q4Tap7PStU47xDs',
-    appId: '1:455133580821:web:7e591243322a40e528481c',
-    messagingSenderId: '455133580821',
-    projectId: 'symphia',
-    authDomain: 'symphia.firebaseapp.com',
-    storageBucket: 'symphia.appspot.com',
-    measurementId: 'G-VQN0PE5TWT',
-  );
+  static FirebaseOptions get web => FirebaseOptions(
+        apiKey: dotenv.env['WEB_API_KEY']!,
+        appId: dotenv.env['WEB_APP_ID']!,
+        messagingSenderId: '455133580821',
+        projectId: 'symphia',
+        authDomain: 'symphia.firebaseapp.com',
+        storageBucket: 'symphia.appspot.com',
+        measurementId: 'G-VQN0PE5TWT',
+      );
 
-  static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDzpvyZi85hdlz6W-n0nCLJoryFfEAh9rM',
-    appId: '1:455133580821:android:4b7472bdc702b56e28481c',
-    messagingSenderId: '455133580821',
-    projectId: 'symphia',
-    storageBucket: 'symphia.appspot.com',
-  );
+  static FirebaseOptions get android => FirebaseOptions(
+        apiKey: dotenv.env['ANDROID_API_KEY']!,
+        appId: dotenv.env['ANDROID_APP_ID']!,
+        messagingSenderId: '455133580821',
+        projectId: 'symphia',
+        storageBucket: 'symphia.appspot.com',
+      );
 
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAmm7TKWGjy_yum5VWFEw4Xal1A9qUII1I',
-    appId: '1:455133580821:ios:4c37430028cbe16428481c',
-    messagingSenderId: '455133580821',
-    projectId: 'symphia',
-    storageBucket: 'symphia.appspot.com',
-    iosClientId: '455133580821-4l49f00e5ple1fu5t2ufbuhvacpeec4l.apps.googleusercontent.com',
-    iosBundleId: 'com.example.symphia',
-  );
+  static FirebaseOptions get ios => FirebaseOptions(
+        apiKey: dotenv.env['IOS_API_KEY']!,
+        appId: dotenv.env['IOS_APP_ID']!,
+        messagingSenderId: '455133580821',
+        projectId: 'symphia',
+        storageBucket: 'symphia.appspot.com',
+        iosClientId:
+            '455133580821-4l49f00e5ple1fu5t2ufbuhvacpeec4l.apps.googleusercontent.com',
+        iosBundleId: 'com.example.symphia',
+      );
 
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyAmm7TKWGjy_yum5VWFEw4Xal1A9qUII1I',
-    appId: '1:455133580821:ios:4c37430028cbe16428481c',
-    messagingSenderId: '455133580821',
-    projectId: 'symphia',
-    storageBucket: 'symphia.appspot.com',
-    iosClientId: '455133580821-4l49f00e5ple1fu5t2ufbuhvacpeec4l.apps.googleusercontent.com',
-    iosBundleId: 'com.example.symphia',
-  );
+  static FirebaseOptions get macos => FirebaseOptions(
+        apiKey: dotenv.env['MACOS_API_KEY']!,
+        appId: dotenv.env['MACOS_APP_ID']!,
+        messagingSenderId: '455133580821',
+        projectId: 'symphia',
+        storageBucket: 'symphia.appspot.com',
+        iosClientId:
+            '455133580821-4l49f00e5ple1fu5t2ufbuhvacpeec4l.apps.googleusercontent.com',
+        iosBundleId: 'com.example.symphia',
+      );
 
-  static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyAF2b2z5B1sgEh74rg8q4Tap7PStU47xDs',
-    appId: '1:455133580821:web:a5b057adf010e8f228481c',
-    messagingSenderId: '455133580821',
-    projectId: 'symphia',
-    authDomain: 'symphia.firebaseapp.com',
-    storageBucket: 'symphia.appspot.com',
-    measurementId: 'G-BR9WZXGLMZ',
-  );
+  static FirebaseOptions get windows => FirebaseOptions(
+        apiKey: dotenv.env['WINDOWS_API_KEY']!,
+        appId: dotenv.env['WINDOWS_APP_ID']!,
+        messagingSenderId: '455133580821',
+        projectId: 'symphia',
+        authDomain: 'symphia.firebaseapp.com',
+        storageBucket: 'symphia.appspot.com',
+        measurementId: 'G-BR9WZXGLMZ',
+      );
 }
