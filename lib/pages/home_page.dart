@@ -5,9 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:symphia/services/database_service.dart';
 
 class HomePage extends StatelessWidget {
-  HomePage({Key? key}) : super(key: key);
+  HomePage({super.key});
 
   final ValueNotifier<bool> loginNotifier = ValueNotifier<bool>(false);
 
@@ -121,10 +122,21 @@ class HomePage extends StatelessWidget {
                                 await signInWithGoogle();
                             // Navigate to the next screen if the sign-in was successful
                             if (userCredential != null) {
-                              Get.offAllNamed('/main');
+                              final databaseService = DatabaseService();
+                              final userProfileStream =
+                                  databaseService.getUser();
+                              final userProfileSnapshot =
+                                  await userProfileStream.first;
+
+                              if (userProfileSnapshot != null) {
+                                // User data exists in Firestore, navigate to '/main'
+                                Get.offAllNamed('/main');
+                              } else {
+                                // User data does not exist in Firestore, navigate to '/name'
+                                Get.offAllNamed('/name');
+                              }
                             }
                           } catch (e) {
-                            // Handle the error
                             print(e);
                           }
                         },
