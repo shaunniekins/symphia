@@ -1,8 +1,6 @@
 // main_page.dart
 
 import 'package:flutter/material.dart';
-import 'package:flutter_gemini/flutter_gemini.dart';
-import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:get/get.dart';
 import 'package:symphia/controller.dart';
 
@@ -41,36 +39,28 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
           ),
         ],
       ),
-      body: GeminiResponseTypeView(
-        builder: (context, child, response, loading) {
-          if (loading) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
+      body: Obx(() => ListView.builder(
+            itemCount: controller.chatHistory.length,
+            itemBuilder: (context, index) {
+              final message = controller.chatHistory[index];
 
-          if (response != null) {
-            return Markdown(
-              data: response,
-              selectable: true,
-            );
-          } else {
-            // Idle state
-            return Center(
-              child: Obx(
-                () => controller.isListening.value
-                    ? const CircularProgressIndicator()
-                    : const SizedBox(),
-              ),
-            );
-          }
-        },
-      ),
+              return ListTile(
+                leading: const CircleAvatar(
+                  backgroundColor: Colors.red,
+                ),
+                title: Text(
+                  message,
+                  style: const TextStyle(color: Colors.white),
+                ),
+              );
+            },
+          )),
       floatingActionButton: FloatingActionButton(
         shape: const CircleBorder(),
         backgroundColor: Colors.purple,
         foregroundColor: Colors.white,
-        onPressed: () {
+        onPressed: () async {
+          await controller.stopSpeaking();
           controller.onListen();
         },
         child: Obx(() => Icon(

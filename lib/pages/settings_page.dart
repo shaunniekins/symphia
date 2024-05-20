@@ -24,7 +24,6 @@ class _SettingsPageState extends State<SettingsPage> {
   Future<void> _deleteAccount() async {
     final user = FirebaseAuth.instance.currentUser;
 
-    // Reauthenticate the user
     final GoogleSignIn googleSignIn = GoogleSignIn();
     final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
     final GoogleSignInAuthentication? googleAuth =

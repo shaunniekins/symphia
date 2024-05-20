@@ -9,7 +9,7 @@ class Controller extends GetxController {
 }
 
 Widget audioWaveWidget({
-  required Controller controller,
+  required dynamic controller,
   required AnimationController animationController,
 }) {
   final random = Random();
