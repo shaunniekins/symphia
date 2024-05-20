@@ -11,6 +11,7 @@ import 'package:symphia/pages/home_page.dart';
 import 'package:symphia/pages/main_page.dart';
 import 'package:symphia/pages/persona/birthday_page.dart';
 import 'package:symphia/pages/persona/name_page.dart';
+import 'package:symphia/pages/settings_page.dart';
 import 'package:symphia/pages/splash_screen.dart';
 import 'package:symphia/services/database_service.dart';
 
@@ -32,10 +33,16 @@ Future main() async {
         getPages: [
           GetPage(name: '/', page: () => const SplashScreen()),
           GetPage(name: '/home', page: () => HomePage()),
+          GetPage(name: '/settings', page: () => const SettingsPage()),
           GetPage(name: '/main', page: () => const MainPage()),
           GetPage(name: '/name', page: () => const NamePage()),
           GetPage(name: '/birthday', page: () => const BirthdayPage())
         ],
+        // theme: ThemeData(
+        //   primarySwatch: Colors.grey,
+        //   colorScheme: ColorScheme.fromSeed(seedColor: Colors.grey),
+        //   visualDensity: VisualDensity.adaptivePlatformDensity,
+        // ),
       ),
     );
   } else {

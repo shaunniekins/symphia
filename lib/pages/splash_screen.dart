@@ -34,7 +34,6 @@ class _SplashScreenState extends State<SplashScreen> {
       final userProfileSnapshot = await userProfileStream.first;
 
       if (userProfileSnapshot != null) {
-        print('User data exists in Firestore');
         // User data exists in Firestore, navigate to HomePage with a fade transition
         Get.offAll(
           () => const MainPage(),

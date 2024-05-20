@@ -45,8 +45,8 @@ class _NamePageState extends State<NamePage> {
                       TextFormField(
                         controller: _nameController,
                         decoration: const InputDecoration(
-                          hintText: 'Name',
-                          helperText: 'This is what Symphia will call you',
+                          hintText: 'First Name or Nickname',
+                          helperText: 'This is what Symphia will call you.',
                           helperStyle: TextStyle(
                             fontSize: 18.0,
                             color: Colors.grey,
@@ -56,8 +56,17 @@ class _NamePageState extends State<NamePage> {
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Please enter your name';
+                          } else if (value.length < 2) {
+                            return 'Name must be at least 2 characters';
+                          } else if (value.length > 10) {
+                            return 'Name must be less than 10 characters';
+                          } else if (!RegExp(r'^[a-zA-Z]+$').hasMatch(value)) {
+                            return 'Name must contain only alphabetic characters';
                           }
                           return null;
+                        },
+                        onChanged: (value) {
+                          _formKey.currentState?.validate();
                         },
                         onSaved: (value) {
                           Get.find<UserController>().saveName(value!);

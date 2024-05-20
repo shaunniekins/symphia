@@ -352,9 +352,8 @@ class _InterestPageState extends State<InterestPage> {
                               name: userController.name.value,
                               birthday:
                                   DateTime.parse(userController.birthday.value),
-                              preferences: userController
-                                  .selectedInterests.value
-                                  .map((key, value) =>
+                              preferences: userController.selectedInterests.map(
+                                  (key, value) =>
                                       MapEntry(key, value.toList())),
                             );
 

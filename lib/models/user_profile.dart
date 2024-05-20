@@ -1,4 +1,4 @@
-// usre_profile.dart
+// user_profile.dart
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -19,7 +19,10 @@ class UserProfile {
   UserProfile.fromMap(Map<String, dynamic> map)
       : uid = map['uid'],
         name = map['name'],
-        birthday = (map['birthday'] as Timestamp).toDate(),
+        birthday = DateTime(
+            (map['birthday'] as Timestamp).toDate().year,
+            (map['birthday'] as Timestamp).toDate().month,
+            (map['birthday'] as Timestamp).toDate().day),
         preferences = map['preferences'] != null
             ? Map<String, dynamic>.from(map['preferences'])
             : {};
@@ -29,7 +32,7 @@ class UserProfile {
     return {
       'uid': uid,
       'name': name,
-      'birthday': birthday,
+      'birthday': DateTime(birthday.year, birthday.month, birthday.day),
       'preferences': preferences,
     };
   }
