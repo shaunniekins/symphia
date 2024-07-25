@@ -13,32 +13,43 @@ class HomePage extends StatelessWidget {
   final ValueNotifier<bool> loginNotifier = ValueNotifier<bool>(false);
 
   Future<UserCredential?> signInWithGoogle() async {
-    // Trigger the authentication flow
-    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+    print('Google sign-in process started');
 
-    // If the user cancels the sign-in process, return null
-    if (googleUser == null) {
+    try {
+      // Trigger the authentication flow
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+      print('Google sign-in dialog shown');
+
+      // If the user cancels the sign-in process, return null
+      if (googleUser == null) {
+        print('Google sign-in canceled by user');
+        return null;
+      }
+
+      // Obtain the auth details from the request
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
+      print('Google sign-in authentication obtained');
+
+      // Create a new credential
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+      print('Google sign-in credentials created');
+
+      // Once signed in, return the UserCredential
+      final UserCredential userCredential =
+          await FirebaseAuth.instance.signInWithCredential(credential);
+      print('Google sign-in successful, user: ${userCredential.user?.email}');
+
+      // Notify that the user has logged in
+      loginNotifier.value = true;
+      return userCredential;
+    } catch (e) {
+      print('Error signing in with Google: $e');
       return null;
     }
-
-    // Obtain the auth details from the request
-    final GoogleSignInAuthentication googleAuth =
-        await googleUser.authentication;
-
-    // Create a new credential
-    final credential = GoogleAuthProvider.credential(
-      accessToken: googleAuth.accessToken,
-      idToken: googleAuth.idToken,
-    );
-
-    // Once signed in, return the UserCredential
-    UserCredential userCredential =
-        await FirebaseAuth.instance.signInWithCredential(credential);
-
-    // Notify that the user has logged in
-    loginNotifier.value = true;
-
-    return userCredential;
   }
 
   @override

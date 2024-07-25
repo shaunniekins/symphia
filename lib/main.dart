@@ -7,7 +7,6 @@ import 'package:get/get.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:symphia/controller/user_controller.dart';
-import 'package:symphia/gemini_config.dart';
 import 'package:symphia/pages/home_page.dart';
 import 'package:symphia/pages/main_page.dart';
 import 'package:symphia/pages/persona/birthday_page.dart';

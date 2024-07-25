@@ -1,4 +1,4 @@
-package com.example.symphia
+package com.snlabs.symphia
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -7,20 +7,12 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:455133580821:android:4b7472bdc702b56e28481c",
+        "mobilesdk_app_id": "1:455133580821:android:b02406cbfd7e30f228481c",
         "android_client_info": {
-          "package_name": "com.example.symphia"
+          "package_name": "com.snlabs.symphia"
         }
       },
       "oauth_client": [
-        {
-          "client_id": "455133580821-himuii79emqbjndup3hddh2c8u81pi4r.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.symphia",
-            "certificate_hash": "e7048a2908eb0f05f89f0462128ce012befbd41c"
-          }
-        },
         {
           "client_id": "455133580821-venhdc9hd0gk7kerc0rsglser45i1bov.apps.googleusercontent.com",
           "client_type": 3
